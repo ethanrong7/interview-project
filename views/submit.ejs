@@ -1,0 +1,58 @@
+<%- include('partials/header'); %>
+<h1 class="kek">Submit your recruitment experience</h1>
+<form action="" method="post">
+    <div class="form-group">
+        <label>Company name</label>
+        <input class="form-control" type="text" name="company">
+        <label>Company Role</label>
+        <input class="form-control" type="text" name="companyRole">
+        
+        <div id="interview">
+            <hr>
+            <label style="font-size: 2rem">Interview</label>
+            <button type="button" class="btn btn-success block">+</button>
+            <div style="display: flex">
+                <div style="width: 30%">
+                    <p>Type of Interview</p>
+                </div>
+                <div style="width: 70%">
+                    <p>Interview questions</p>
+                </div>
+            </div>
+            <div style="display:flex">
+                <div style="width:30%">
+                    <input class="form-control" type="text" name="interviewType">
+                </div>
+                <div style="width: 65%">
+                    <textarea name="" id="" style="width: 100%" cols="10" rows="5"></textarea>
+                </div>
+                <div style="width: 5%">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</form>
+<button class="btn btn-primary block" style="margin-top: 100px; width: 100%"><h4>Publish</h4</button>
+<%- include('partials/footer'); %>
+
+<script>
+    $(".btn-success").click(function(){
+        var html_code = '<div style="display:flex"><div style="width:30%"> <input class="form-control" type="text" name="interviewType"></div><div style="width: 65%"><textarea name="" id="" style="width: 100%" cols="10" rows="5"></textarea></div><div style="width: 5%"> <button type="button" class="btn btn-danger" ' + "onclick=buttonDelete(this); return false;'>-</button>"
+        var html_code2 = 
+        $('#interview').append(html_code);
+    });
+</script>
+
+<script>
+    function buttonDelete(link) {
+        var row = link.parentNode.parentNode;
+        var table = row.parentNode;
+        table.removeChild(row);
+    }
+</script>
+
+
+
+
+
