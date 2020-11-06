@@ -1,11 +1,17 @@
 <%- include('partials/header'); %>
 <h1 class="kek">Submit your recruitment experience</h1>
+<hr>
 <form action="" method="post">
     <div class="form-group">
-        <label>Company name</label>
-        <input class="form-control" type="text" name="company">
-        <label>Company Role</label>
-        <input class="form-control" type="text" name="companyRole">
+        <div id="general">
+            <label style="font-size: 2rem; display: block">General information</label>
+            <label>Company name</label>
+            <input class="form-control" type="text" name="company">
+            <label>Applied position</label>
+            <input class="form-control" type="text" name="companyRole" placeholder="E.g. Software Engineer Intern">
+            <label>Year of application</label>
+            <select name="yearpicker" id="yearpicker" class="form-control"></select>
+        </div>
         
         <div id="interview">
             <hr>
@@ -15,31 +21,44 @@
                 <div style="width: 30%">
                     <p>Type of Interview</p>
                 </div>
-                <div style="width: 70%">
+                <div class="interview-textarea" style="width: 70%">
                     <p>Interview questions</p>
                 </div>
             </div>
             <div style="display:flex">
                 <div style="width:30%">
-                    <input class="form-control" type="text" name="interviewType">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>Face to face interview</option>
+                        <option>Video interview</option>
+                        <option>Assessment center</option>
+                        <option>Phone Interview</option>
+                      </select>
                 </div>
                 <div style="width: 65%">
-                    <textarea name="" id="" style="width: 100%" cols="10" rows="5"></textarea>
+                    <textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="- Why did you apply for x company?&#10- Why did you apply for x position?&#10&#10(Press enter to type on a new line)"></textarea>
                 </div>
                 <div style="width: 5%">
                 </div>
-            </div>
-            
+            </div>           
         </div>
+
+        <div id="culture">  
+            <label style="font-size: 2rem; display: block">Program experience</label>
+            <label style="margin-bottom: 5px">Yearly salary ($ AUD)</label>
+            <input type="number"class="form-control" id="replyNumber" min="0" max="999999" data-bind="value:replyNumber"/>
+            <label style="margin-bottom: 5px">What was the culture like?</label>
+            <textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="I enjoyed/disliked my internship because..."></textarea>
+        </div>
+
     </div>
+    <button class="btn btn-primary block" style="margin-top: 100px; width: 100%"><h4>Publish</h4</button>
 </form>
-<button class="btn btn-primary block" style="margin-top: 100px; width: 100%"><h4>Publish</h4</button>
+
 <%- include('partials/footer'); %>
 
 <script>
     $(".btn-success").click(function(){
-        var html_code = '<div style="display:flex"><div style="width:30%"> <input class="form-control" type="text" name="interviewType"></div><div style="width: 65%"><textarea name="" id="" style="width: 100%" cols="10" rows="5"></textarea></div><div style="width: 5%"> <button type="button" class="btn btn-danger" ' + "onclick=buttonDelete(this); return false;'>-</button>"
-        var html_code2 = 
+        var html_code = '<div style="display:flex"><div style="width:30%"> <select class="form-control" id="exampleFormControlSelect1"> <option>Face to face interview</option> <option>Video interview</option> <option>Assessment center</option> </select> </div><div style="width: 65%"><textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="- Why did you apply for x company?&#10- Why did you apply for x position?"></textarea></div><div style="width: 5%"> <button type="button" class="btn btn-danger" ' + "onclick=buttonDelete(this); return false;'>-</button>"
         $('#interview').append(html_code);
     });
 </script>
@@ -52,7 +71,11 @@
     }
 </script>
 
-
-
+<script>
+    for (i = new Date().getFullYear(); i > 1990; i--)
+    {
+    $('#yearpicker').append($('<option />').val(i).html(i));
+    }
+</script>
 
 

@@ -2,6 +2,10 @@
     margin-bottom: -50px;
 }
 
+#culture {
+    margin-top: 70px;
+}
+
 .container-fluid {
     padding-top: 70px;
     padding-bottom: 70px;
@@ -51,3 +55,10 @@
     display: block;
 }
 
+#yearpicker {
+    display: block;
+}
+
+::-webkit-input-placeholder {
+    font-style: italic;
+ }
