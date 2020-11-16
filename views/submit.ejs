@@ -16,7 +16,7 @@
         <div id="interview">
             <hr>
             <label style="font-size: 2rem">Interview</label>
-            <button type="button" class="btn btn-success block">+</button>
+            <button type="button" class="btn btn-success block" id="interview-button">+</button>
             <div style="display: flex">
                 <div style="width: 30%">
                     <p>Type of Interview</p>
@@ -42,33 +42,76 @@
             </div>           
         </div>
 
-        <div id="culture">  
+        <div id="experience">  
+            <hr>
             <label style="font-size: 2rem; display: block">Program experience</label>
-            <label style="margin-bottom: 5px">Yearly salary ($ AUD)</label>
-            <input type="number"class="form-control" id="replyNumber" min="0" max="999999" data-bind="value:replyNumber"/>
-            <label style="margin-bottom: 5px">What was the culture like?</label>
-            <textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="I enjoyed/disliked my internship because..."></textarea>
+
+            <div id="salary">
+                <label style="margin-bottom: 5px; display: block;">Yearly salary ($ AUD)</label>
+                <input type="number"class="form-control" id="replyNumber" min="0" max="999999" data-bind="value:replyNumber" placeholder="60000"/>                  
+            </div>
+
+            <button type="button" class="btn btn-danger dont-know" id="salary-button">I don't know this program's salary</button>
+
+            <div id="culture">
+                <label style="margin-bottom: 5px">What was the culture like?</label>
+                <textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="I enjoyed/disliked my internship because..."></textarea> 
+            </div>
+
+            <button type="button" class="btn btn-danger dont-know" id="culture-button">I don't know this program's culture</button>
+            
         </div>
 
     </div>
-    <button class="btn btn-primary block" style="margin-top: 100px; width: 100%"><h4>Publish</h4</button>
+    <button class="btn btn-primary block" style="margin-top: 50px; width: 100%"><h4>Publish</h4</button>
 </form>
 
 <%- include('partials/footer'); %>
 
+<!-- Add and remove interview quetsions -->
 <script>
-    $(".btn-success").click(function(){
+    $("#interview-button").click(function(){
         var html_code = '<div style="display:flex"><div style="width:30%"> <select class="form-control" id="exampleFormControlSelect1"> <option>Face to face interview</option> <option>Video interview</option> <option>Assessment center</option> </select> </div><div style="width: 65%"><textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="- Why did you apply for x company?&#10- Why did you apply for x position?"></textarea></div><div style="width: 5%"> <button type="button" class="btn btn-danger" ' + "onclick=buttonDelete(this); return false;'>-</button>"
         $('#interview').append(html_code);
     });
-</script>
 
-<script>
     function buttonDelete(link) {
         var row = link.parentNode.parentNode;
         var table = row.parentNode;
         table.removeChild(row);
     }
+</script>
+
+<!-- Add and remove program experience textboxes-->
+<script>
+
+    $("#salary-button, #culture-button").click(function(){
+
+        var buttonClicked;
+        var divId;
+
+        if (this.id === "salary-button") {
+            buttonClicked = "salary-button";
+            divId = "salary"
+        }
+        else if (this.id === "culture-button") {
+            buttonClicked = "culture-button";
+            divId = "culture"
+        }
+
+        $('#' + divId).toggle("fast", "linear", function() {
+            if($('#' + buttonClicked).hasClass("btn-danger")) {
+                $('#' + buttonClicked).removeClass("btn-danger");
+                $('#' + buttonClicked).addClass("btn-success");
+                $('#' + buttonClicked).text("I know this program's " + divId);
+            } else {
+                $('#' + buttonClicked).removeClass("btn-success");
+                $('#' + buttonClicked).addClass("btn-danger");
+                $('#' + buttonClicked).text("I don't know this program's " + divId);
+            }
+        });
+    });
+    
 </script>
 
 <script>
