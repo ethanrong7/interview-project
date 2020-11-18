@@ -70,12 +70,20 @@
 
 <!-- Add and remove interview quetsions -->
 <script>
+    var noOfInterviews = 1;
+
     $("#interview-button").click(function(){
-        var html_code = '<div style="display:flex"><div style="width:30%"> <select class="form-control" id="exampleFormControlSelect1"> <option>Face to face interview</option> <option>Video interview</option> <option>Assessment center</option> </select> </div><div style="width: 65%"><textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="- Why did you apply for x company?&#10- Why did you apply for x position?"></textarea></div><div style="width: 5%"> <button type="button" class="btn btn-danger" ' + "onclick=buttonDelete(this); return false;'>-</button>"
-        $('#interview').append(html_code);
+        if (noOfInterviews < 4) {
+            noOfInterviews += 1;
+            var html_code = '<div style="display:flex"><div style="width:30%"> <select class="form-control" id="exampleFormControlSelect1"> <option>Face to face interview</option> <option>Video interview</option> <option>Assessment center</option> </select> </div><div style="width: 65%"><textarea class="interview-textarea form-control" id="" style="width: 100%" cols="10" rows="5" placeholder="- Why did you apply for x company?&#10- Why did you apply for x position?"></textarea></div><div style="width: 5%"> <button type="button" class="btn btn-danger" ' + "onclick=buttonDelete(this); return false;'>-</button>"
+            $('#interview').append(html_code);
+        } else {
+            alert("Maximum number of interviews are 4");
+        }
     });
 
     function buttonDelete(link) {
+        noOfInterviews -= 1;
         var row = link.parentNode.parentNode;
         var table = row.parentNode;
         table.removeChild(row);
@@ -114,11 +122,17 @@
     
 </script>
 
+<!-- Year dropdown -->
 <script>
     for (i = new Date().getFullYear(); i > 1990; i--)
     {
     $('#yearpicker').append($('<option />').val(i).html(i));
     }
+    /*
+    $('#yearpicker').on('change', function() {
+        var companyYear = this.value;
+    })
+    */
 </script>
 
 
