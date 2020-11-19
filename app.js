@@ -4,14 +4,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mysql = require("mysql");
-
 const app = express();
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-
-var applicationNo = 1;
 
 var connection = mysql.createPool({
     host: 'localhost',
@@ -45,15 +42,31 @@ app.post("/submit", function(req, res){
         }
         console.log("Submitted application form");
     });
-    
-    applicationNo = applicationNo + 1;
     res.render("submit");
 });
+
+app.get("/purpose", function(req,res) {
+    res.render("purpose");
+})
 
 app.get("/company/:companyName", function(req, res) {
     const customCompanyName = req.params.companyName;
 
-    res.render("company", {companyNameUrl: customCompanyName});
+    var companySql = "SELECT company_name FROM application WHERE company_name = '" + customCompanyName + "'";
+
+    connection.query(companySql, function(err,result) {
+        if (err) {
+            throw (err);
+        }
+        
+        if (result.length != 0) {
+            console.log(customCompanyName + " was found!");
+            res.render("company", {companyNameUrl: customCompanyName});
+        } else {
+            console.log(customCompanyName + " was not found.");
+            res.render("notfound");
+        }
+    });
 })
 
 app.listen(3000, function() {
