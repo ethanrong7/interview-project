@@ -13,7 +13,7 @@ app.use(express.static("public"));
 var connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'xd',
+    password: 'xdxd',
     database: 'applicationDB'
 });
 

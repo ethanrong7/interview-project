@@ -73,3 +73,29 @@
      margin-bottom: 20px;
      display: block;
  }
+
+ #individual-application {
+     background-color: #F9F9F9;
+     border-radius: 10px;
+     border: 1px solid;
+     padding-left: 20px;
+     padding-top: 10px;
+ }
+
+ .applied-position {
+    display: inline-block; 
+    font-weight: bold; 
+    color: #1abc9c;
+ }
+
+ .applied-salary {
+    display: inline-block;
+    float: right;
+    margin-right: 20px;
+ }
+
+ .applied-hr {
+     margin-top: 5px;
+     margin-bottom: 5px;
+     margin-right: 10px;
+ }
