@@ -13,6 +13,8 @@
 
 <hr>
 
+<!-- Filter for each application -->
+
 <div class="">
     <form class="form-inline my-2 my-lg-0">
         <h4>Filter the applications</h4>
@@ -23,19 +25,35 @@
 
 <hr>
 
-<div id="individual-application" class="border border-secondary">
-    <h4 class="applied-position"><%= companyPosition %></h4>
-    <h4 class="applied-salary">AUD$<%= yearlySalary %></h4>
-    <p>Sydney NSW - <%= yearApp %></p>
-    <hr class="applied-hr">
-    <p>Face to face interview</p>
-    <ul>
-        <li>Question 1</li>
-        <li>Question 2</li>
-    </ul>
-    <p>Culture</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in volu</p>
-</div>
+<!-- Template for each application response tile -->
+<% for (var i = 0; i < resultSql.length; i++) { %>
+    <div class="border border-secondary individual-application">
+        <h4 class="applied-position"><%= resultSql[i].applied_position %></h4>
+        <h4 class="applied-salary">AUD$<%= resultSql[i].yearly_salary %></h4>
+        <p>Sydney NSW - <%= resultSql[i].year_app %></p>
+        <hr class="applied-hr">
+        <p>Submitted interview questions</p>
+        
+        <ul class="list-group">
+
+            <% for (var j = 0; j < submitInterview.length; j++) { %>
+
+                <% if (resultSql[i].type_of_interview1 === submitInterview[j] || resultSql[i].type_of_interview2 === submitInterview[j]
+                || resultSql[i].type_of_interview3 === submitInterview[j] || resultSql[i].type_of_interview4 === submitInterview[j] ) {%>
+                    
+                    <li class="list-group-item list-group-item-success"><%= submitInterview[j] %></li>
+                <% } else{ %>
+                    <li class="list-group-item list-group-item-danger"><%= submitInterview[j] %></li>
+                <% } %>
+            <% } %>
+
+   
+        </ul>
+        <p>Culture</p>
+        <p class="applied-culture"><%= resultSql[i].culture %></p>
+    </div>
+<% } %>
 
 
 <%- include('partials/footer'); %>
+

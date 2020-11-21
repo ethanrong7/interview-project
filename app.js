@@ -48,36 +48,12 @@ app.post("/submit", function(req, res){
 app.get("/purpose", function(req,res) {
     res.render("purpose");
 })
-/*
-app.get("/company/:companyName", function(req, res) {
-    const customCompanyName = req.params.companyName;
 
-    var companySql = "SELECT company_name FROM application WHERE company_name = '" + customCompanyName + "'";
-
-    connection.query(companySql, function(err,result) {
-        if (err) {
-            throw (err);
-        }
-
-        if (result.length != 0) {
-
-            result = JSON.parse(JSON.stringify(result));
-            
-            console.log(customCompanyName + " was found!");
-            res.render("company", {companyNameUrl: customCompanyName, companyPosition: "testing"});
-            console.log(result.some(item => item.company_name === customCompanyName) + " working!!!!");
-        } else {
-            console.log(customCompanyName + " was not found.");
-            res.render("notfound");
-        }
-        
-    });
-});
-*/
 app.get("/company/:companyName", function(req, res) {
     const customCompanyName = req.params.companyName;
 
     var companySql = "SELECT * FROM application WHERE company_name = '" + customCompanyName + "'";
+    var interviewType = ["Assessment Centre", "Face to face interview", "Phone Interview", "Video interview"];
 
     connection.query(companySql, function(err,result) {
         if (err) {
@@ -88,7 +64,7 @@ app.get("/company/:companyName", function(req, res) {
 
         if (result.some(item => item.company_name === customCompanyName) === true) {          
             console.log(customCompanyName + " was found!");
-            res.render("company", {companyNameUrl: customCompanyName, companyPosition: result[0].applied_position, yearlySalary: result[0].yearly_salary, yearApp: result[0].year_app});
+            res.render("company", {companyNameUrl: customCompanyName, resultSql: result, submitInterview: interviewType});            
         } else {
             console.log(customCompanyName + " was not found.");
             res.render("notfound");

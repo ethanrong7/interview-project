@@ -74,7 +74,7 @@
      display: block;
  }
 
- #individual-application {
+ .individual-application {
      background-color: #F9F9F9;
      border-radius: 10px;
      border: 1px solid;
@@ -100,3 +100,21 @@
      margin-bottom: 5px;
      margin-right: 10px;
  }
+
+ .applied-culture {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  ul.list-group:after {
+    clear: both;
+    display: block;
+    content: "";
+  }
+
+  .list-group-item {
+    float: left;
+    width: 169px;
+    text-align: center;
+}
