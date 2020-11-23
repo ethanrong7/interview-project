@@ -1,5 +1,6 @@
 <%- include('partials/header'); %>
 
+
 <div>
     <h1> <%= companyNameUrl %></h1>
 </div>
@@ -27,33 +28,50 @@
 
 <!-- Template for each application response tile -->
 <% for (var i = 0; i < resultSql.length; i++) { %>
-    <div class="border border-secondary individual-application">
-        <h4 class="applied-position"><%= resultSql[i].applied_position %></h4>
-        <h4 class="applied-salary">AUD$<%= resultSql[i].yearly_salary %></h4>
-        <p>Sydney NSW - <%= resultSql[i].year_app %></p>
-        <hr class="applied-hr">
-        <p>Submitted interview questions</p>
-        
-        <ul class="list-group">
 
-            <% for (var j = 0; j < submitInterview.length; j++) { %>
+    <script>
+        var appID = '<%= resultSql[i].application_id %>'
+    </script>
 
-                <% if (resultSql[i].type_of_interview1 === submitInterview[j] || resultSql[i].type_of_interview2 === submitInterview[j]
-                || resultSql[i].type_of_interview3 === submitInterview[j] || resultSql[i].type_of_interview4 === submitInterview[j] ) {%>
-                    
-                    <li class="list-group-item list-group-item-success"><%= submitInterview[j] %></li>
-                <% } else{ %>
-                    <li class="list-group-item list-group-item-danger"><%= submitInterview[j] %></li>
+    <a class="anchor-application" href="http://www.youtube.com">
+
+        <div class="border border-secondary individual-application">
+            
+            
+            <h4 class="applied-position"><%= resultSql[i].applied_position %></h4>
+            <h4 class="applied-salary">AUD$<%= resultSql[i].yearly_salary %></h4>
+            <p>Sydney NSW - <%= resultSql[i].year_app %></p>
+            <hr class="applied-hr">
+            <p>Submitted interview questions</p>
+            
+            <ul class="list-group">
+
+                <% for (var j = 0; j < submitInterview.length; j++) { %>
+
+                    <% if (resultSql[i].type_of_interview1 === submitInterview[j] || resultSql[i].type_of_interview2 === submitInterview[j]
+                    || resultSql[i].type_of_interview3 === submitInterview[j] || resultSql[i].type_of_interview4 === submitInterview[j] ) {%>
+                        
+                        <li class="list-group-item list-group-item-success"><%= submitInterview[j] %></li>
+                    <% } else{ %>
+                        <li class="list-group-item list-group-item-danger"><%= submitInterview[j] %></li>
+                    <% } %>
                 <% } %>
-            <% } %>
-
-   
-        </ul>
-        <p>Culture</p>
-        <p class="applied-culture"><%= resultSql[i].culture %></p>
-    </div>
+                    
+            </ul>
+            <p>Culture</p>
+            <p class="applied-culture"><%= resultSql[i].culture %></p>
+        </div>
+    </a>
 <% } %>
-
 
 <%- include('partials/footer'); %>
 
+<script>
+    $(".individual-application").hover(
+        function (){
+            $(this).children("h4").css("text-decoration", "underline");
+            
+    }, function() {
+        $(this).children("h4").css("text-decoration", "none");
+    });
+</script>

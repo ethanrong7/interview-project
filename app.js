@@ -73,6 +73,13 @@ app.get("/company/:companyName", function(req, res) {
     });
 });
 
+app.get("/company/:companyName/:applicationID", function(req, res) {
+    const customCompanyName = req.params.companyName;
+    const applicationID = req.params.applicationID;
+
+    res.render("application", {companyNameUrl: customCompanyName, appID: applicationID});
+});
+
 app.listen(3000, function() {
     console.log("Server started on port 3000");
 });
