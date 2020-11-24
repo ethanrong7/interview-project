@@ -29,11 +29,7 @@
 <!-- Template for each application response tile -->
 <% for (var i = 0; i < resultSql.length; i++) { %>
 
-    <script>
-        var appID = '<%= resultSql[i].application_id %>'
-    </script>
-
-    <a class="anchor-application" href="http://www.youtube.com">
+    <a class="anchor-application" href="http://localhost:3000/company/<%= companyNameUrl %>/<%= resultSql[i].application_id %>"> 
 
         <div class="border border-secondary individual-application">
             

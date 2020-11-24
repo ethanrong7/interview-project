@@ -77,7 +77,24 @@ app.get("/company/:companyName/:applicationID", function(req, res) {
     const customCompanyName = req.params.companyName;
     const applicationID = req.params.applicationID;
 
-    res.render("application", {companyNameUrl: customCompanyName, appID: applicationID});
+    var applicationSql = "SELECT * FROM application WHERE application_id = '" + applicationID + "' AND company_name = '" + customCompanyName + "'";
+    
+    connection.query(applicationSql, function(err,result) {
+        if (err) {
+            throw (err);
+        }
+
+        result = JSON.parse(JSON.stringify(result));
+
+        if (result.some(item => item.company_name === customCompanyName) === true && result.some(item => item.application_id.toString() === applicationID) === true) {          
+            console.log("The application was found");
+            res.render("application", {jobPosition: result[0].applied_position, companyNameUrl: customCompanyName});            
+        } else {
+            console.log(customCompanyName + " was not found.");
+            res.render("notfound");
+        }
+        
+    });
 });
 
 app.listen(3000, function() {
