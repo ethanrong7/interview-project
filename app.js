@@ -88,7 +88,12 @@ app.get("/company/:companyName/:applicationID", function(req, res) {
 
         if (result.some(item => item.company_name === customCompanyName) === true && result.some(item => item.application_id.toString() === applicationID) === true) {          
             console.log("The application was found");
-            res.render("application", {jobPosition: result[0].applied_position, companyNameUrl: customCompanyName});            
+            res.render("application", {jobPosition: result[0].applied_position, companyNameUrl: customCompanyName, applicationYear: result[0].year_app, 
+                firstInterview: result[0].type_of_interview1, firstInterviewQuestions: result[0].interview1_questions, 
+                secondInterview: result[0].type_of_interview2, secondInterviewQuestions: result[0].interview2_questions,
+                thirdInterview: result[0].type_of_interview3, thirdInterviewQuestions: result[0].interview3_questions,
+                fourthInterview: result[0].type_of_interview4, fourthInterviewQuestions: result[0].interview4_questions,
+                cultureEntry: result[0].culture});            
         } else {
             console.log(customCompanyName + " was not found.");
             res.render("notfound");
