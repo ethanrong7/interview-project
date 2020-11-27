@@ -7,23 +7,27 @@
 
 <hr>
 
-<h3 style="font-weight: bold; margin-bottom: 2%">Submitted interviews</h3>
+<div id="application-interview">
 
-<h4 style="font-weight: bold; margin-bottom: 1%"><%= firstInterview %></h4>
+    <h3 style="font-weight: bold; margin-bottom: 2%">Submitted interviews</h3>
 
-<p><%= firstInterviewQuestions %></p>
+    <h4 style="font-weight: bold; margin-bottom: 1%"><%= firstInterview %></h4>
 
-<h4 style="font-weight: bold; margin-bottom: 1%"><%= secondInterview %></h4>
+    <p id="application-interview-question1"><%= firstInterviewQuestions %></p>
 
-<p><%= secondInterviewQuestions %></p>
+    <h4 style="font-weight: bold; margin-bottom: 1%"><%= secondInterview %></h4>
 
-<h4 style="font-weight: bold; margin-bottom: 1%"><%= thirdInterview %></h4>
+    <p id="application-interview-question2"><%= secondInterviewQuestions %></p>
 
-<p><%= thirdInterviewQuestions %></p>
+    <h4 style="font-weight: bold; margin-bottom: 1%"><%= thirdInterview %></h4>
 
-<h4 style="font-weight: bold; margin-bottom: 1%"><%= fourthInterview %></h4>
+    <p id="application-interview-question3"><%= thirdInterviewQuestions %></p>
 
-<p><%= fourthInterviewQuestions %></p>
+    <h4 style="font-weight: bold; margin-bottom: 1%"><%= fourthInterview %></h4>
+
+    <p id="application-interview-question4"><%= fourthInterviewQuestions %></p>
+
+</div>
 
 <hr>
 
@@ -32,7 +36,26 @@
 <p><%= cultureEntry %></p>
 
 
-
-
-
 <%- include('partials/footer'); %>
+
+<script>
+   $(document).ready(function() {
+       try {
+            for (var i = 0; i < 4; i++) {
+                var appString = $("#application-interview-question" + i).text();
+                var newString = appString.replace(/- /g, "<br />");
+                $("#application-interview-question" + i).html(newString);
+            };
+       } 
+       catch (err) {
+           throw(err);
+       }
+    
+       for (var i = 0; i < $("#application-interview").children().length; i++) {
+            if($("#application-interview").children()[i].innerText.localeCompare("undefined") === 0) {
+                $("#application-interview").children().eq(i).html("");
+            } 
+       }
+   });
+</script>
+

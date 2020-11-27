@@ -34,14 +34,27 @@ app.get("/submit", function(req, res){
 })
 
 app.post("/submit", function(req, res){
-    var sql = "INSERT INTO application (`company_name`, `applied_position`, `year_app`, `type_of_interview1`, `interview1_questions`, `type_of_interview2`, `interview2_questions`, `type_of_interview3`, `interview3_questions`, `type_of_interview4`, `interview4_questions`, `yearly_salary`, `culture`) VALUES ('" + req.body.company.replace("'", "''") + "', '" + req.body.companyRole + "', '" + req.body.yearpicker + "', '" + req.body.interviewType1 + "', '" + req.body.interviewQuestion1 + "', '" + req.body.interviewType2 + "', '" + req.body.interviewQuestion2 + "', '" + req.body.interviewType3 + "', '" + req.body.interviewQuestion3 + "', '" + req.body.interviewType4 + "', '" + req.body.interviewQuestion4 + "', '" + req.body.salaryResp + "', '" + req.body.cultureResp + "')";
-    console.log(sql);
-    connection.query(sql, function(err, result) {
-        if (err) {
-            throw (err);
-        }
-        console.log("Submitted application form");
-    });
+    
+    function UndefinedString(bodyParser) {
+        if (bodyParser != null) {
+            bodyParser = bodyParser.replace(/'/g, "\\'");
+        } 
+        return bodyParser
+    }
+
+    try {
+        var sql = "INSERT INTO application (`company_name`, `applied_position`, `year_app`, `type_of_interview1`, `interview1_questions`, `type_of_interview2`, `interview2_questions`, `type_of_interview3`, `interview3_questions`, `type_of_interview4`, `interview4_questions`, `yearly_salary`, `culture`) VALUES ('" + UndefinedString(req.body.company) + "', '" + UndefinedString(req.body.companyRole) + "', '" + req.body.yearpicker + "', '" + req.body.interviewType1 + "', '" + UndefinedString(req.body.interviewQuestion1) + "', '" + req.body.interviewType2 + "', '" + UndefinedString(req.body.interviewQuestion2) + "', '" + req.body.interviewType3 + "', '" + UndefinedString(req.body.interviewQuestion3) + "', '" + req.body.interviewType4 + "', '" + UndefinedString(req.body.interviewQuestion4) + "', '" + UndefinedString(req.body.salaryResp) + "', '" + UndefinedString(req.body.cultureResp) + "')";
+        console.log(sql);
+        connection.query(sql, function(err, result) {
+            if (err) {
+                throw (err);
+            }
+            console.log("Submitted application form");
+        });
+    }
+    catch(err) {
+        console.log(err);
+    }
     res.render("submit");
 });
 
