@@ -1,3 +1,16 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+}
+
+.border-bottom {
+    margin-bottom: 25px;
+}
 
 #interview {
     margin-bottom: -50px;
@@ -87,6 +100,8 @@ a {
      padding-left: 20px;
      padding-top: 10px;
      margin-bottom: 10px;
+     zoom: 0.8;
+    -moz-transform: scale(0.8);
  }
 
  .individual-application:hover {
@@ -133,3 +148,10 @@ a {
    color: black;
 }
 
+.arrow {
+    width: 15px;
+}
+
+#pageNo-Link {
+    border-right: 1px solid #ddd
+}

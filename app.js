@@ -62,8 +62,9 @@ app.get("/purpose", function(req,res) {
     res.render("purpose");
 })
 
-app.get("/company/:companyName", function(req, res) {
+app.get("/company/:companyName/p:pageNumber", function(req, res) {
     const customCompanyName = req.params.companyName;
+    const pageNumber = req.params.pageNumber;
 
     var companySql = "SELECT * FROM application WHERE company_name = '" + customCompanyName + "'";
     var interviewType = ["Assessment Centre", "Face to face interview", "Phone Interview", "Video interview"];
@@ -77,7 +78,7 @@ app.get("/company/:companyName", function(req, res) {
 
         if (result.some(item => item.company_name === customCompanyName) === true) {          
             console.log(customCompanyName + " was found!");
-            res.render("company", {companyNameUrl: customCompanyName, resultSql: result, submitInterview: interviewType});            
+            res.render("company", {companyNameUrl: customCompanyName, resultSql: result, submitInterview: interviewType, pageNo: pageNumber});            
         } else {
             console.log(customCompanyName + " was not found.");
             res.render("notfound");
@@ -86,7 +87,7 @@ app.get("/company/:companyName", function(req, res) {
     });
 });
 
-app.get("/company/:companyName/:applicationID", function(req, res) {
+app.get("/company/:companyName/application/:applicationID", function(req, res) {
     const customCompanyName = req.params.companyName;
     const applicationID = req.params.applicationID;
 

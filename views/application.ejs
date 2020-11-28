@@ -31,20 +31,28 @@
 
 <hr>
 
-<h3 style="font-weight: bold; margin-bottom: 2%">Culture</h3>
+<div id="application-culture">
 
-<p><%= cultureEntry %></p>
+    <h3 style="font-weight: bold; margin-bottom: 2%">Culture</h3>
+
+    <p><%= cultureEntry %></p>
+
+</div>
+
+
 
 
 <%- include('partials/footer'); %>
 
 <script>
    $(document).ready(function() {
+    
        try {
             for (var i = 0; i < 4; i++) {
                 var appString = $("#application-interview-question" + i).text();
-                var newString = appString.replace(/- /g, "<br />");
-                $("#application-interview-question" + i).html(newString);
+                var newString = appString.replace(/- /g, "<br />- ");
+                var newString = newString.replace("<br />", "");
+                $("#application-interview-question" + i).html(newString);  
             };
        } 
        catch (err) {
@@ -57,5 +65,14 @@
             } 
        }
    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        if ($("#application-culture").children('p').is(':empty')) {
+            $("#application-culture").children('h3').html("Culture - <i>Not submitted</i>");
+            $("#application-culture").children('p').html("The author of this submission has not submitted a testimonial for culture");
+        }
+    });
 </script>
 
