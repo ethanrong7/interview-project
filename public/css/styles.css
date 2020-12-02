@@ -155,3 +155,25 @@ a {
 #pageNo-Link {
     border-right: 1px solid #ddd
 }
+
+.home-button {
+    width: 250px;
+    margin: 15px;
+    height: 75px;
+    font-size: 18px;
+}
+
+#home-div {
+    text-align: center;
+    padding: 125px;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+#search-company-bar{
+    visibility: hidden;
+}

@@ -1,6 +1,5 @@
 <%- include('partials/header'); %>
 
-
 <div>
     <h1> <%= companyNameUrl %></h1>
 </div>
@@ -26,7 +25,6 @@
 
 <hr>
 
-
 <!-- Template for each application response tile -->
 <% for (var i = (pageNo - 1)*5; i < Math.min(((pageNo - 1)*5 + 5), resultSql.length); i++) { %>
 
@@ -41,7 +39,7 @@
             <hr class="applied-hr">
             <p><b>Submitted interview questions</b></p>
             
-            <ul class="list-group">
+            <ul class="list-group list-group-horizontal">
 
                 <% for (var j = 0; j < submitInterview.length; j++) { %>
 
@@ -55,7 +53,7 @@
                 <% } %>
                     
             </ul>
-            <p><b>Culture: </b></p>
+            <p style="margin-top: 10px;"><b>Culture: </b></p>
             <p class="applied-culture"><%= resultSql[i].culture %></p>
         </div>
     </a>
@@ -100,6 +98,10 @@
     }, function() {
         $(this).children("h4").css("text-decoration", "none");
     });
+</script>
+
+<script>
+    
 </script>
 
 
