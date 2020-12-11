@@ -13,7 +13,7 @@ app.use(express.static("public"));
 var connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'xdxd',
+    password: 'xd',
     database: 'applicationDB'
 });
 
@@ -29,12 +29,17 @@ app.get("/", function(req, res){
     res.render("home");
 });
 
+app.post("/", function(req, res) {
+    res.redirect('/');
+});
+
 app.get("/submit", function(req, res){
     res.render("submit");
 })
 
 app.post("/submit", function(req, res){
     
+    // Make sure there aren't any ' or "" that will mess with the SQL query //
     function UndefinedString(bodyParser) {
         if (bodyParser != null) {
             bodyParser = bodyParser.replace(/'/g, "\\'");

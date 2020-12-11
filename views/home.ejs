@@ -5,12 +5,11 @@
     <button id="search-interview-btn" type="button" class="btn btn-primary home-button"><b>Search for interviews</b></button>
     <a href="/submit"><button type="button" class="btn btn-success home-button"><b>Submit an interview</b></button></a>
 
-    <form class="mx-2 my-auto d-inline w-100" id="search-company-bar">
+    <form class="mx-2 my-auto d-inline w-100" id="search-company-bar" acion="" method="post">
         <div class="input-group">
-            <form class="mx-2 my-auto d-inline w-100">
-           <input type="search" class="form-control" placeholder="Search" aria-label="Search">
+           <input id="companySearch" type="search" name="companySearch" class="form-control" placeholder="Search" aria-label="Search">
             <span class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">GO</button>
+            <button id="submitButton" class="btn btn-outline-secondary" type="submit">GO</button>
             </span>
          </div>
      </form>
@@ -23,6 +22,32 @@
         $("#search-interview-btn").click(function(){
             $("#search-company-bar").css("visibility", "visible");
         })
+
+
     })
 </script>
+
+<script>
+    $(document).ready(function() {
+
+        $("#search-company-bar").on("submit", function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                type : "POST",
+                url : "/",
+                cache: false,
+                data : $("#companySearch").serialize(),
+
+                success : function(response) {
+                    /* enter a javascript behaviour change here */  
+                                 
+                }
+            });
+            e.preventDefault();
+        });
+    });
+</script>
+
+
 
