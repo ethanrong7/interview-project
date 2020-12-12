@@ -4,6 +4,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mysql = require("mysql");
+const e = require("express");
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -13,7 +14,7 @@ app.use(express.static("public"));
 var connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'xd',
+    password: 'xdxd',
     database: 'applicationDB'
 });
 
@@ -25,12 +26,39 @@ connection.getConnection(function(err){
     }
 });
 
+var companySearch;
+
 app.get("/", function(req, res){
-    res.render("home");
+    
+    res.render("home", {companyName: companySearch});
 });
 
 app.post("/", function(req, res) {
-    res.redirect('/');
+
+    try {
+        var sql = "SELECT distinct(company_name) FROM application WHERE company_name LIKE '%" + req.body.companySearch + "%' ORDER BY company_name asc";
+        connection.query(sql, function(err, result) {
+            if (err) {
+                throw (err);
+            }
+
+            result = JSON.parse(JSON.stringify(result));
+
+            if (result.length > 0) {
+                console.log("Found the company");          
+                companySearch = result[0].company_name;           
+            } else {
+                console.log("Did not find the company");   
+                companySearch = "did not find the company";
+            }
+            
+            res.redirect("/");
+        })
+    }
+    catch(err) {
+        console.log(err);
+    }
+
 });
 
 app.get("/submit", function(req, res){

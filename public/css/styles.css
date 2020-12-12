@@ -177,3 +177,9 @@ a {
 #search-company-bar{
     visibility: hidden;
 }
+
+#company-div{
+    height: 200px;
+    width: 200px;
+    background-color: red;
+}
